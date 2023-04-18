@@ -1,1 +1,3 @@
-# project-proposel-perfect-toy
+- This is a test, please ignore
+- Aron Kohl
+- CSC 260
