@@ -23,6 +23,7 @@ namespace Project_Proposel___AronKohl
                 Console.WriteLine("+--------------------+");
                 Console.WriteLine("Start Game (S)");
                 Console.WriteLine("Instructions (I)");
+                Console.WriteLine("Turn Music Off (O)");
                 Console.WriteLine("Exit (E)");
                 Console.WriteLine(" ");
                 Console.Write("Enter a command: ");
@@ -37,7 +38,7 @@ namespace Project_Proposel___AronKohl
                     Console.ReadLine();
                     Console.WriteLine("But something doesnt seem right.");
                     Console.ReadLine();
-                    Console.WriteLine("I mean, you herard about the officer that worked at the night shift here??");
+                    Console.WriteLine("I mean, you heard about the officer that worked at the night shift here??");
                     Console.ReadLine();
                     Console.WriteLine("He never came back the next morning!!!");
                     Console.ReadLine();
@@ -81,6 +82,11 @@ namespace Project_Proposel___AronKohl
                 else if (input == "E")
                 {
                     Environment.Exit(1);
+                }
+                else if (input == "O")
+                {
+                    Console.Clear();
+                    musicplayer.Stop();
                 }
                 else
                 {
@@ -194,11 +200,28 @@ namespace Project_Proposel___AronKohl
                         string answer = Console.ReadLine();
                         if (answer == "Y")
                         {
-                            Console.Clear();
-                            SoundPlayer musicplayer = new SoundPlayer();
-                            musicplayer.SoundLocation = "Pizza Tower OST - Tunnely Shimbers (Don't Make A Sound).wav";
-                            musicplayer.Play();
-                            Entrance();
+                            while (true)
+                            {
+                                Console.WriteLine("Would you like music playing? Yes(Y) or No(N): ");
+                                string music = Console.ReadLine();
+                                if (music == "Y")
+                                {
+                                    Console.Clear();
+                                    SoundPlayer musicplayer = new SoundPlayer();
+                                    musicplayer.SoundLocation = "Pizza Tower OST - Tunnely Shimbers (Don't Make A Sound).wav";
+                                    musicplayer.Play();
+                                    Entrance();
+                                }
+                                if (music == "N")
+                                {
+                                    Console.Clear();
+                                    Entrance();
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Not an valid answer");
+                                }
+                            }
                         }
                         if (answer == "N")
                         {
@@ -207,7 +230,7 @@ namespace Project_Proposel___AronKohl
                         }
                         else
                         {
-                            Console.WriteLine("Not an invalid answer");
+                            Console.WriteLine("Not an valid answer");
                         }
                     }
                 }
@@ -216,60 +239,82 @@ namespace Project_Proposel___AronKohl
 
         static void vision()
         {
-            Enemy puppet = new Enemy();
-            Player player = new Player();
-            player.health = 10;
             Random rnd = new Random();
             int number = rnd.Next(0, 20);
             if (number == 0)
             {
                 Console.WriteLine("Vision from Enemy: NULL");
-                Console.WriteLine("Health: " + player.health);
             }
             if (number == 1 || number == 2 || number == 3 || number == 4 || number == 5)
             {
                 Console.WriteLine("Vision from Enemy: Safe");
-                Console.WriteLine("Health: " + player.health);
             }
             if (number == 6 || number == 7 || number == 8 || number == 9 || number == 10)
             {
                 Console.WriteLine("Vision from Enemy: Average");
-                Console.WriteLine("Health: " + player.health);
             }
             if (number == 11 || number == 12 || number == 13 || number == 14 || number == 15)
             {
                 Console.WriteLine("Vision from Enemy: Watch Out");
-                Console.WriteLine("Health: " + player.health);
             }
             if (number ==  16 || number == 17 || number == 18 || number == 19 || number == 20)
             {
-                Console.WriteLine("Vision from Enemy: RUN");
-                player.health = player.health - puppet.strength;
-                Console.WriteLine("Health: " + player.health);
-            }
-        }
-
-
-
-        static void backpack()
-        {
-            Console.WriteLine("(1): This is a test");
-            Console.WriteLine("(2): This is a test");
-            Console.WriteLine("(3): This is a test");
-            Console.WriteLine("What would you like to do?");
-            Console.Write("Enter a Command: ");
-            string pack = Console.ReadLine();
-            if (pack == "1")
-            {
-
-            }
-            if (pack == "2")
-            {
-
-            }
-            if (pack == "3")
-            {
-
+                while (true)
+                {
+                    Console.WriteLine("Vision from Enemy: DANGER");
+                    int death = rnd.Next(1, 5);
+                    Console.Write("Pick a number between 1-5 to escape: ");
+                    string pick = Console.ReadLine();
+                    if (pick == "1")
+                    {
+                        if (death == 1)
+                        {
+                            gameOver();
+                        }
+                        Console.WriteLine("Safe, for now...");
+                        break;
+                    }
+                    if (pick == "2")
+                    {
+                        if (death == 2)
+                        {
+                            gameOver();
+                        }
+                        Console.WriteLine("Safe, for now...");
+                        break;
+                    }
+                    if (pick == "3")
+                    {
+                        if (death == 3)
+                        {
+                            gameOver();
+                        }
+                        Console.WriteLine("Safe, for now...");
+                        break;
+                    }
+                    if (pick == "4")
+                    {
+                        if (death == 4)
+                        {
+                            gameOver();
+                        }
+                        Console.WriteLine("Safe, for now...");
+                        break;
+                    }
+                    if (pick == "5")
+                    {
+                        if (death == 5)
+                        {
+                            gameOver();
+                        }
+                        Console.WriteLine("Safe, for now...");
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Please Pick a Number");
+                    }
+                }
             }
         }
 
@@ -283,7 +328,7 @@ namespace Project_Proposel___AronKohl
             Console.WriteLine("Current Objective: Find the Evidence, and leave");
             Console.WriteLine(" ");
             Console.WriteLine("+------------------------------+");
-            Console.WriteLine("|(B)         (U)Up          (I)|");
+            Console.WriteLine("|            (U)Up          (I)|");
             Console.WriteLine("|                  0           |");
             Console.WriteLine("|                +-0-0         |");
             Console.WriteLine("|        0---0---+ | |         |");
@@ -296,7 +341,6 @@ namespace Project_Proposel___AronKohl
             Console.WriteLine("|            (D)Down           |");
             Console.WriteLine("+------------------------------+");
             Console.WriteLine("Vision from Enemy: Safe");
-            Console.WriteLine("Health: Safe");
             Console.WriteLine("Location: " + room.Name);
             Console.WriteLine("Info: " + room.Description);
             Console.WriteLine(" ");
@@ -337,10 +381,6 @@ namespace Project_Proposel___AronKohl
                         Console.WriteLine("Sorry, cant leave");
                     }
                 }
-                if (input == "B")
-                {
-                    backpack();
-                }
             }
         }
 
@@ -348,14 +388,13 @@ namespace Project_Proposel___AronKohl
         {
             Console.Clear();
             Room room = new Room();
-            Item item = new Item();
             room.Name = "Entrance Hall";
             room.Interact = "Nothing for you to Interact";
             room.Description = "Looks Bigger than expected!!";
             Console.WriteLine("Current Objective: Find the Evidence, and leave");
             Console.WriteLine(" ");
             Console.WriteLine("+------------------------------+");
-            Console.WriteLine("|(B)         (U)Up          (I)|");
+            Console.WriteLine("|            (U)Up          (I)|");
             Console.WriteLine("|                  0           |");
             Console.WriteLine("|                +-0-0         |");
             Console.WriteLine("|        0---0---+ | |         |");
@@ -395,10 +434,6 @@ namespace Project_Proposel___AronKohl
                 {
                     Console.WriteLine("" + room.Interact);
                 }
-                if (input == "B")
-                {
-                    backpack();
-                }
             }
         }
 
@@ -412,7 +447,7 @@ namespace Project_Proposel___AronKohl
             Console.WriteLine("Current Objective: Find the Evidence, and leave");
             Console.WriteLine(" ");
             Console.WriteLine("+------------------------------+");
-            Console.WriteLine("|(B)         (U)Up          (I)|");
+            Console.WriteLine("|            (U)Up          (I)|");
             Console.WriteLine("|                  0           |");
             Console.WriteLine("|                +-0-0         |");
             Console.WriteLine("|        0---0---+ | |         |");
@@ -452,10 +487,6 @@ namespace Project_Proposel___AronKohl
                 {
                     Console.WriteLine("" + room.Interact);
                 }
-                if (input == "B")
-                {
-                    Console.WriteLine("Progress");
-                }
             }
         }
 
@@ -463,14 +494,13 @@ namespace Project_Proposel___AronKohl
         {
             Console.Clear();
             Room room = new Room();
-            puzzleItem item = new puzzleItem();
             room.Name = "Toy Closet";
             room.Interact = "You see a circle with a number (5) behind a stack of toys. Must be used for a code";
             room.Description = "Cluster of dolls and puppets";
             Console.WriteLine("Current Objective: Find the Evidence, and leave");
             Console.WriteLine(" ");
             Console.WriteLine("+------------------------------+");
-            Console.WriteLine("|(B)         (U)Up          (I)|");
+            Console.WriteLine("|            (U)Up          (I)|");
             Console.WriteLine("|                  0           |");
             Console.WriteLine("|                +-0-0         |");
             Console.WriteLine("|        0---0---+ | |         |");
@@ -510,10 +540,6 @@ namespace Project_Proposel___AronKohl
                 {
                     Console.WriteLine("" + room.Interact);
                 }
-                if (input == "B")
-                {
-                    Console.WriteLine("Progress");
-                }
             }
         }
 
@@ -527,7 +553,7 @@ namespace Project_Proposel___AronKohl
             Console.WriteLine("Current Objective: Find the Evidence, and leave");
             Console.WriteLine(" ");
             Console.WriteLine("+------------------------------+");
-            Console.WriteLine("|(B)         (U)Up          (I)|");
+            Console.WriteLine("|            (U)Up          (I)|");
             Console.WriteLine("|                  0           |");
             Console.WriteLine("|                +-0-0         |");
             Console.WriteLine("|        *---0---+ | |         |");
@@ -567,10 +593,6 @@ namespace Project_Proposel___AronKohl
                 {
                     Console.WriteLine("" + room.Interact);
                 }
-                if (input == "B")
-                {
-                    Console.WriteLine("Progress");
-                }
             }
         }
 
@@ -584,7 +606,7 @@ namespace Project_Proposel___AronKohl
             Console.WriteLine("Current Objective: Find the Evidence, and leave");
             Console.WriteLine(" ");
             Console.WriteLine("+------------------------------+");
-            Console.WriteLine("|(B)         (U)Up          (I)|");
+            Console.WriteLine("|            (U)Up          (I)|");
             Console.WriteLine("|                  0           |");
             Console.WriteLine("|                +-0-0         |");
             Console.WriteLine("|        0---*---+ | |         |");
@@ -624,10 +646,6 @@ namespace Project_Proposel___AronKohl
                 {
                     Console.WriteLine("" + room.Interact);
                 }
-                if (input == "B")
-                {
-                    Console.WriteLine("Progress");
-                }
             }
         }
 
@@ -641,7 +659,7 @@ namespace Project_Proposel___AronKohl
             Console.WriteLine("Current Objective: Find the Evidence, and leave");
             Console.WriteLine(" ");
             Console.WriteLine("+------------------------------+");
-            Console.WriteLine("|(B)         (U)Up          (I)|");
+            Console.WriteLine("|            (U)Up          (I)|");
             Console.WriteLine("|                  0           |");
             Console.WriteLine("|                +-0-0         |");
             Console.WriteLine("|        0---0---+ | |         |");
@@ -681,10 +699,6 @@ namespace Project_Proposel___AronKohl
                 {
                     Console.WriteLine("" + room.Interact);
                 }
-                if (input == "B")
-                {
-                    Console.WriteLine("Progress");
-                }
             }
         }
 
@@ -699,7 +713,7 @@ namespace Project_Proposel___AronKohl
             Console.WriteLine("Current Objective: Find the Evidence, and leave");
             Console.WriteLine(" ");
             Console.WriteLine("+------------------------------+");
-            Console.WriteLine("|(B)         (U)Up          (I)|");
+            Console.WriteLine("|            (U)Up          (I)|");
             Console.WriteLine("|                  0           |");
             Console.WriteLine("|                +-*-0         |");
             Console.WriteLine("|        0---0---+ | |         |");
@@ -748,10 +762,6 @@ namespace Project_Proposel___AronKohl
                 {
                     Console.WriteLine("" + room.Interact);
                 }
-                if (input == "B")
-                {
-                    Console.WriteLine("Progress");
-                }
             }
         }
 
@@ -760,12 +770,12 @@ namespace Project_Proposel___AronKohl
             Console.Clear();
             Room room = new Room();
             room.Name = "BackStage Room";
-            room.Interact = "You found the evidence you need, now get out for HE comes for you";
+            room.Interact = "You found the evidence you need (SKIN), now get out for HE comes for you";
             room.Description = "Nothing but a destroyed human. Gone but his skin, nailed in the wall";
             Console.WriteLine("Current Objective: Find the Evidence, and leave");
             Console.WriteLine(" ");
             Console.WriteLine("+------------------------------+");
-            Console.WriteLine("|(B)         (U)Up          (I)|");
+            Console.WriteLine("|            (U)Up          (I)|");
             Console.WriteLine("|                  *           |");
             Console.WriteLine("|                +-0-0         |");
             Console.WriteLine("|        0---0---+ | |         |");
@@ -805,10 +815,6 @@ namespace Project_Proposel___AronKohl
                 {
                     Console.WriteLine("" + room.Interact);
                 }
-                if (input == "B")
-                {
-                    Console.WriteLine("Progress");
-                }
             }
         }
 
@@ -824,7 +830,7 @@ namespace Project_Proposel___AronKohl
             Console.WriteLine("Current Objective: Find the Evidence, and leave");
             Console.WriteLine(" ");
             Console.WriteLine("+------------------------------+");
-            Console.WriteLine("|(B)         (U)Up          (I)|");
+            Console.WriteLine("|            (U)Up          (I)|");
             Console.WriteLine("|                  0           |");
             Console.WriteLine("|                +-0-0         |");
             Console.WriteLine("|        0---0---+ | |         |");
@@ -873,10 +879,6 @@ namespace Project_Proposel___AronKohl
                 {
                     Console.WriteLine("" + room.Interact);
                 }
-                if (input == "B")
-                {
-                    Console.WriteLine("Progress");
-                }
             }
         }
 
@@ -890,7 +892,7 @@ namespace Project_Proposel___AronKohl
             Console.WriteLine("Current Objective: See what lies below");
             Console.WriteLine(" ");
             Console.WriteLine("+------------------------------+");
-            Console.WriteLine("|(B)         (U)Up          (I)|");
+            Console.WriteLine("|            (U)Up          (I)|");
             Console.WriteLine("|                  0           |");
             Console.WriteLine("|                +-0-0         |");
             Console.WriteLine("|        0---0---+ | |         |");
@@ -903,10 +905,9 @@ namespace Project_Proposel___AronKohl
             Console.WriteLine("|            (D)Down           |");
             Console.WriteLine("+------------------------------+");
             Console.WriteLine("Vision From enemy: ???");
-            Console.WriteLine("Health: Safe");
             Console.WriteLine("Location: " + room.Name);
             Console.WriteLine("Info: " + room.Description);
-            Console.WriteLine(" ");
+            Console.WriteLine("");
             while (true)
             {
                 Console.Write("Enter a Command: ");
@@ -952,10 +953,6 @@ namespace Project_Proposel___AronKohl
                         }
                     }
                 }
-                if (input == "B")
-                {
-                    Console.WriteLine("Progress");
-                }
             }
         }
 
@@ -969,7 +966,7 @@ namespace Project_Proposel___AronKohl
             Console.WriteLine("Current Objective: Find the Evidence, and leave");
             Console.WriteLine(" ");
             Console.WriteLine("+------------------------------+");
-            Console.WriteLine("|(B)         (U)Up          (I)|");
+            Console.WriteLine("|            (U)Up          (I)|");
             Console.WriteLine("|                  0           |");
             Console.WriteLine("|                +-0-0         |");
             Console.WriteLine("|        0---0---+ | |         |");
@@ -1007,11 +1004,7 @@ namespace Project_Proposel___AronKohl
                 }
                 if (input == "I")
                 {
-                    Console.WriteLine(" " + room.Interact);
-                }
-                if (input == "B")
-                {
-                    Console.WriteLine("Progress");
+                    Console.WriteLine("" + room.Interact);
                 }
             }
         }
@@ -1026,7 +1019,7 @@ namespace Project_Proposel___AronKohl
             Console.WriteLine("Current Objective: Find the Evidence, and leave");
             Console.WriteLine(" ");
             Console.WriteLine("+------------------------------+");
-            Console.WriteLine("|(B)         (U)Up          (I)|");
+            Console.WriteLine("|            (U)Up          (I)|");
             Console.WriteLine("|                  0           |");
             Console.WriteLine("|                +-0-*         |");
             Console.WriteLine("|        0---0---+ | |         |");
@@ -1064,11 +1057,7 @@ namespace Project_Proposel___AronKohl
                 }
                 if (input == "I")
                 {
-                    Console.WriteLine(" " + room.Interact);
-                }
-                if (input == "B")
-                {
-                    Console.WriteLine("Progress");
+                    Console.WriteLine("" + room.Interact);
                 }
             }
         }
@@ -1078,12 +1067,12 @@ namespace Project_Proposel___AronKohl
             Console.Clear();
             Room room = new Room();
             room.Name = "Parts And Service";
-            room.Interact = "You picked up a robotic arm with a tringale number '9'";
+            room.Interact = "You see a robotic arm with a tringale number '9'. Maybe thats used for a code?";
             room.Description = "A bunch of parts all over the place. Why is there metal inside of a puppet?";
             Console.WriteLine("Current Objective: Find the Evidence, and leave");
             Console.WriteLine(" ");
             Console.WriteLine("+------------------------------+");
-            Console.WriteLine("|(B)         (U)Up          (I)|");
+            Console.WriteLine("|            (U)Up          (I)|");
             Console.WriteLine("|                  0           |");
             Console.WriteLine("|                +-0-0         |");
             Console.WriteLine("|        0---0---+ | |         |");
@@ -1121,11 +1110,7 @@ namespace Project_Proposel___AronKohl
                 }
                 if (input == "I")
                 {
-                    Console.WriteLine(" " + room.Interact);
-                }
-                if (input == "B")
-                {
-                    Console.WriteLine("Progress");
+                    Console.WriteLine("" + room.Interact);
                 }
             }
         }
@@ -1140,7 +1125,7 @@ namespace Project_Proposel___AronKohl
             Console.WriteLine("Current Objective: Find the Evidence, and leave");
             Console.WriteLine(" ");
             Console.WriteLine("+------------------------------+");
-            Console.WriteLine("|(B)         (U)Up          (I)|");
+            Console.WriteLine("|            (U)Up          (I)|");
             Console.WriteLine("|                  0           |");
             Console.WriteLine("|                +-0-0         |");
             Console.WriteLine("|        0---0---+ | |         |");
@@ -1178,11 +1163,7 @@ namespace Project_Proposel___AronKohl
                 }
                 if (input == "I")
                 {
-                    Console.WriteLine(" " + room.Interact);
-                }
-                if (input == "B")
-                {
-                    Console.WriteLine("Progress");
+                    Console.WriteLine("" + room.Interact);
                 }
             }
         }
@@ -1210,7 +1191,6 @@ namespace Project_Proposel___AronKohl
             Console.WriteLine("|                              |");
             Console.WriteLine("+------------------------------+");
             Console.WriteLine("Vision from Enemy: N U L L");
-            Console.WriteLine("Health: N U L L");
             Console.WriteLine("Location: " + room.Name);
             Console.WriteLine("Info: " + room.Description);
             Console.WriteLine(" ");
@@ -1237,10 +1217,6 @@ namespace Project_Proposel___AronKohl
                 if (input == "I")
                 {
                     Console.WriteLine("" + room.Interact);
-                }
-                if (input == "B")
-                {
-                    Console.WriteLine("Progress");
                 }
             }
         }
@@ -1318,9 +1294,12 @@ namespace Project_Proposel___AronKohl
             Enemy puppet = new Enemy();
             HealthItem healthItem = new HealthItem();
             healthItem.HealingAmount = 10;
-            puppet.strength = 5;
-            puppet.health = 10;
-            player.health = 20;
+            attackItem attack = new attackItem();
+            attack.damage = 25;
+            puppet.strength = 10;
+            puppet.health = 100;
+            player.health = 50;
+            player.damage = 5;
             while (true)
             {
                 Console.WriteLine("Current Objective: Kill the Puppet");
@@ -1345,7 +1324,7 @@ namespace Project_Proposel___AronKohl
                 {
                     Console.WriteLine("You attack the Puppeter");
                     Console.ReadLine();
-                    puppet.health--;
+                    puppet.health = puppet.health - player.damage;
                     Console.WriteLine("Puppet's Turn");
                     Random rnd = new Random();
                     int number = rnd.Next(1, 4);
@@ -1382,15 +1361,14 @@ namespace Project_Proposel___AronKohl
                 }
                 if (turn == "I")
                 {
-                    int i = 0;
-                    if (i == 0 || i == 1 || i == 2)
+                    Random rnd = new Random();
+                    int item = rnd.Next(1, 3);
+                    if (item == 1)
                     {
-                        i++;
-                        Console.WriteLine("You used an item");
+                        Console.WriteLine("You used an healing item");
                         Console.ReadLine();
                         player.health = player.health + healthItem.HealingAmount;
                         Console.WriteLine("Puppet's Turn");
-                        Random rnd = new Random();
                         int number = rnd.Next(1, 4);
                         if (number == 1 || number == 2)
                         {
@@ -1404,13 +1382,30 @@ namespace Project_Proposel___AronKohl
                         Console.ReadLine();
                         Console.Clear();
                     }
-                    else if (i == 3)
+                    if (item == 2)
                     {
-                        Console.WriteLine("Sorry, you ran out");
+                        Console.WriteLine("You used an damage item");
                         Console.ReadLine();
-                        player.health = player.health + healthItem.HealingAmount;
+                        puppet.health = puppet.health - attack.damage;
                         Console.WriteLine("Puppet's Turn");
-                        Random rnd = new Random();
+                        int number = rnd.Next(1, 4);
+                        if (number == 1 || number == 2)
+                        {
+                            Console.WriteLine("Puppet attacked you");
+                            player.health = player.health - puppet.strength;
+                        }
+                        if (number == 3 || number == 4)
+                        {
+                            Console.WriteLine("Puppet Missed You");
+                        }
+                        Console.ReadLine();
+                        Console.Clear();
+                    }
+                    if (item == 3)
+                    {
+                        Console.WriteLine("You used a nothing item");
+                        Console.ReadLine();
+                        Console.WriteLine("Puppet's Turn");
                         int number = rnd.Next(1, 4);
                         if (number == 1 || number == 2)
                         {
@@ -1451,12 +1446,12 @@ namespace Project_Proposel___AronKohl
                 }
 
                 //When health is low
-                if (puppet.health == 0)
+                if (puppet.health <= 0)
                 {
                     musicplayer.Stop();
                     ending_2_part2();
                 }
-                else if (player.health == 0)
+                else if (player.health <= 0)
                 {
                     musicplayer.Stop();
                     gameOver();
